@@ -1,0 +1,25 @@
+site_name: Axe Programming Language
+theme:
+  name: material
+  palette:
+    primary: black
+
+nav:
+  - Home: index.md
+  - Types: types.md
+  - Standard Library:
+    - Arena: stdlib/arena.md
+    - Errors: stdlib/errors.md
+    - String: stdlib/string.md
+    - Memory: stdlib/memory.md
+    - IO: stdlib/io.md
+    - Math: stdlib/math.md
+    - Networking: stdlib/net.md
+    - Time: stdlib/time.md
+    - Terminal: stdlib/term.md
+    - Regex: stdlib/regex.md
+    - Typecons: stdlib/typecons.md
+    - Lists: stdlib/lists.md
+    - JSON: stdlib/json.md
+    - Crypto: stdlib/crypto.md
+    - UUID: stdlib/uuid.md
