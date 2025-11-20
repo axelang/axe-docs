@@ -1,6 +1,8 @@
 site_name: Axe Programming Language
+repo_url: https://github.com/axelang/axe
 theme:
   name: material
+  logo: assets/axe-2.png
   palette:
     primary: black
 
@@ -23,3 +25,4 @@ nav:
     - JSON: stdlib/json.md
     - Crypto: stdlib/crypto.md
     - UUID: stdlib/uuid.md
+
