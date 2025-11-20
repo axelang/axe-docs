@@ -24,6 +24,7 @@ nav:
     - Lists: stdlib/lists.md
     - JSON: stdlib/json.md
     - Crypto: stdlib/crypto.md
+    - Random: stdlib/random.md
     - UUID: stdlib/uuid.md
     - OS: stdlib/os.md
 
