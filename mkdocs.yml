@@ -25,4 +25,5 @@ nav:
     - JSON: stdlib/json.md
     - Crypto: stdlib/crypto.md
     - UUID: stdlib/uuid.md
+    - OS: stdlib/os.md
 
