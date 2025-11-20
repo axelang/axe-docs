@@ -10,10 +10,10 @@ main {
 }
 ```
 
-To compile and run the program, use the following command:
+To compile and run the program, save it as `hello.axe` and use the following command in the same directory as the saved file:
 
 ```bash
-axe hello.axe
+axe hello
 ```
 
 This will generate an executable, that can then be run with either `./hello` or `hello.exe` depending on the platform.
