@@ -1,7 +1,3 @@
-<center>
-<img src="assets/axe.png" alt="Axe Logo" width="50%">
-</center>
-
 Axe is a system programming language that aims to be simple and easy to learn, while still being powerful and efficient.
 
 It aims to be a language that can be used for both system programming and application development, moreover, the language is intentionally minimal to avoid bloat and unnecessary complexity.
