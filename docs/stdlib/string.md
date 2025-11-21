@@ -10,7 +10,8 @@ Creates a new string from a char pointer.
 
 ## def create_with_capacity(arena: char*, capacity: i32): string
 
-Creates a new empty string with specified capacity.
+Creates a new empty string with specified capacity.Note: arena parameter is currently ignored, uses malloc instead
+
 
 ## def str_len(s: string): usize
 
@@ -114,20 +115,17 @@ Converts a double to a string. Buffer must be at least 32 bytes.
 
 ## def fmt(fmt_string: string, args: string[]): string
 
-Formats a string using a format string and arguments.
-Each `{}` placeholder in `fmt_string` is replaced by the next string in `args`.
+Formats a string using a format string and arguments.Each `{}` placeholder in `fmt_string` is replaced by the next string in `args`.
 
 
 ## def find_char_from(s: string, c: char, start: usize): i32
 
-Returns the index of the first occurrence of character `c` in `s` at or after `start`.
-Returns -1 if the character is not found.
+Returns the index of the first occurrence of character `c` in `s` at or after `start`.Returns -1 if the character is not found.
 
 
 ## def substr(s: string, start: usize, length: usize): string
 
-Returns a substring of `s` starting at `start` with the given `length`.
-If `start` is beyond the end of the string or `length` is zero, an empty string is returned.
+Returns a substring of `s` starting at `start` with the given `length`.If `start` is beyond the end of the string or `length` is zero, an empty string is returned.
 The function clamps the requested range to the bounds of the source string.
 
 
