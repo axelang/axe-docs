@@ -75,3 +75,67 @@ Check if a response status code indicates a server error (5xx)
 ## def free_response(response: HttpResponse)
 
 Free the memory allocated for an HttpResponse
+
+## model HttpRequest
+
+HTTP request model containing method, path, headers, and body
+
+## model ServerConfig
+
+HTTP server configuration
+
+## model Socket
+
+Socket handle type (cross-platform)
+
+## model WebServer
+
+Server instance
+
+## def net_init(): bool
+
+Initialize networking subsystem (cross-platform)
+
+## def net_cleanup()
+
+Cleanup networking subsystem (cross-platform)
+
+## def server_create(port: i32): WebServer
+
+Create a server socket and bind to port
+
+## def server_accept(server: WebServer): Socket
+
+Accept a client connection
+
+## def socket_recv(socket: Socket, buffer_size: i32): string
+
+Receive data from a socket
+
+## def socket_send(socket: Socket, data: string): bool
+
+Send data to a socket
+
+## def socket_close(socket: Socket)
+
+Close a socket
+
+## def server_close(server: WebServer)
+
+Close the server socket
+
+## def parse_http_request(rdata: string): HttpRequest
+
+Parse HTTP request from raw data
+
+## def create_http_response(status_code: i32, content_type: string, body: string): string
+
+Create an HTTP response string
+
+## def send_http_response(client: Socket, status_code: i32, content_type: string, body: string): bool
+
+Send an HTTP response to a client
+
+## def free_request(request: HttpRequest)
+
+Free HTTP request memory
