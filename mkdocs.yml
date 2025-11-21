@@ -8,24 +8,32 @@ theme:
 
 nav:
   - Home: index.md
-  - Types: types.md
+  - Getting Started: getting_started.md
+  - Installation: installation.md
+  - Primitive Types: types.md
   - Standard Library:
-    - Arena: stdlib/arena.md
-    - CSV: stdlib/csv.md
-    - Errors: stdlib/errors.md
-    - String: stdlib/string.md
-    - Memory: stdlib/memory.md
-    - IO: stdlib/io.md
-    - Math: stdlib/math.md
-    - Networking: stdlib/net.md
-    - Time: stdlib/time.md
-    - Terminal: stdlib/term.md
-    - Regex: stdlib/regex.md
-    - Typecons: stdlib/typecons.md
-    - Lists: stdlib/lists.md
-    - JSON: stdlib/json.md
-    - Crypto: stdlib/crypto.md
-    - Random: stdlib/random.md
-    - UUID: stdlib/uuid.md
-    - OS: stdlib/os.md
-
+    - std/arena: stdlib/arena.md
+    - std/csv: stdlib/csv.md
+    - std/errors: stdlib/errors.md
+    - std/string: stdlib/string.md
+    - std/memory: stdlib/memory.md
+    - std/io: stdlib/io.md
+    - std/math: stdlib/math.md
+    - std/net: stdlib/net.md
+    - std/time: stdlib/time.md
+    - std/term: stdlib/term.md
+    - std/regex: stdlib/regex.md
+    - std/typecons: stdlib/typecons.md
+    - std/lists: stdlib/lists.md
+    - std/json: stdlib/json.md
+    - std/crypto: stdlib/crypto.md
+    - std/random: stdlib/random.md
+    - std/uuid: stdlib/uuid.md
+    - std/os: stdlib/os.md
+  - Language Features:
+    - Modules: features/modules.md
+    - Generics: features/generics.md
+    - Error Handling: features/error_handling.md
+    - Concurrency and Parallelism: features/concurrency.md
+    - Macros: features/macros.md
+    - Pattern Matching: features/pattern_matching.md
