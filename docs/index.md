@@ -5,7 +5,9 @@ It aims to be a language that can be used for both system programming and applic
 To provide a quick overview of the language, here is the simple hello world program:
 
 ```axe
-main {
+use std.io;
+
+def main() {
     println "Hello, world";
 }
 ```
@@ -21,13 +23,10 @@ This will generate an executable, that can then be run with either `./hello` or 
 If for example you want to take commandline arguments and greet whoever passed it, you can do the following:
 
 ```axe
-use stdlib/os(
-    get_cmdline_args
-);
+use std.os;
+use std.io;
 
-main {
-    print "Hello, ";
-    print get_cmdline_args()[1];
+def main() {
+    println $"Hello, {get_cmdline_args()[1]}";
 }
 ```
-
