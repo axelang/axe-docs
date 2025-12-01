@@ -30,3 +30,15 @@ def main() {
     println $"Hello, {get_cmdline_args()[1]}";
 }
 ```
+
+Bounds checking in cases like this is the responsibility of the user. And here it can be done through use of the `len` builtin.
+For example:
+
+```axe
+def main() {
+    val args: StringList = get_cmdline_args();
+    if len(args) > 1 {
+        println $"Hello, {args[1]}";
+    }
+}
+```
