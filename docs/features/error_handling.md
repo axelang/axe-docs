@@ -22,7 +22,7 @@ model SomeFunctionResult {
     }
 }
 
-pub fn some_function(): SomeFunctionResult {
+pub def some_function(): SomeFunctionResult {
     
 }
 ```
