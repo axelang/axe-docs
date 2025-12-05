@@ -435,21 +435,15 @@ def compute_parallel() {
 }
 ```
 
-## Limitations and Future Directions
-
-### Current Limitations
-
-- No explicit synchronization primitives (locks, semaphores)
-- Limited control over thread pool size
-- No work stealing or task scheduling
-- Parallel loops only for data parallelism
-
 ### Future Enhancements
 
 - Task-based parallelism
 - Custom thread pool configuration
 - Fine-grained synchronization primitives
 - GPU acceleration support
+- Further explicit synchronization primitives
+- More control over thread pool size
+- Work stealing and task scheduling
 
 ## See Also
 
