@@ -1,11 +1,13 @@
 # .\lists.axec
 
-## model name
+## def int_eq(a: i32, b: i32): bool { return a == b; }
 
-## def create(arena: ref Arena, capacity: i32): ref name
+## def long_eq(a: i64, b: i64): bool { return a == b; }
 
-## def push(lst: ref name, arena: ref Arena, value: type)
+## def float_eq(a: f32, b: f32): bool { return a == b; }
 
-## def get(lst: ref name, index: i32): type
+## def double_eq(a: f64, b: f64): bool { return a == b; }
 
-## def print_all(lst: ref name)
+## def char_eq(a: char, b: char): bool { return a == b; }
+
+## def bool_eq(a: bool, b: bool): bool { return a == b; }

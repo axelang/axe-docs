@@ -1,13 +1,10 @@
 # .\typecons.axec
 
-## model Any
-
-An enumeration for any type.A type constructor for any type.
-
-
 ## def from_i32(v: i32): Any
 
+An enumeration for any type.A type constructor for any type.
 Creates an Any from an i32.
+
 
 ## def from_f32(v: f32): Any
 
