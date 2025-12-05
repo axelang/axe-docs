@@ -13,7 +13,7 @@ use std.lists (StringList);
 def process_items_parallel(items: ref StringList) {
     val count: i32 = len(deref(items));
     
-    parallel for mut i = 0; i < count; i = i + 1 {
+    parallel for mut i = 0; i < count; i++ {
         val item: string = StringList.get(items, i);
         val result: string = expensive_operation(item);
         store_result(i, result);
@@ -32,7 +32,7 @@ def matrix_multiply(matrix_a: ref i32, matrix_b: ref i32, size: i32): ref i32 {
     mut result: Arena = Arena.create(size * size * 4);
     mut result_data: i32* = result.data;
     
-    parallel for mut i = 0; i < size; i = i + 1 {
+    parallel for mut i = 0; i < size; i++ {
         for mut j = 0; j < size; j = j + 1 {
             mut sum: i32 = 0;
             for mut k = 0; k < size; k = k + 1 {
@@ -55,7 +55,7 @@ On Windows, OpenMP is automatically linked when parallel constructs are detected
 ```axe
 def parallel_computation() {
     // Compiler automatically links against libomp on Windows
-    parallel for mut i = 0; i < 1000; i = i + 1 {
+    parallel for mut i = 0; i < 1000; i++ {
         compute_value(i);
     }
 }
@@ -74,7 +74,7 @@ On POSIX systems, system OpenMP libraries are linked:
 // Same code works on Linux and macOS
 // Automatically uses system libomp or libgomp
 def parallel_computation() {
-    parallel for mut i = 0; i < 1000; i = i + 1 {
+    parallel for mut i = 0; i < 1000; i++ {
         compute_value(i);
     }
 }
@@ -93,7 +93,7 @@ use std.lists (StringList);
 def transform_all(items: ref StringList): ref StringList {
     val count: i32 = len(deref(items));
     
-    parallel for mut i = 0; i < count; i = i + 1 {
+    parallel for mut i = 0; i < count; i++ {
         val original: string = StringList.get(items, i);
         val transformed: string = transform_string(original);
         store_transformed(i, transformed);
@@ -117,7 +117,7 @@ def sum_array_parallel(data: ref i32, size: i32): i32 {
     
     // Note: Axe doesn't have built-in reduction syntax
     // Use atomic updates or post-merge aggregation
-    parallel for mut i = 0; i < size; i = i + 1 {
+    parallel for mut i = 0; i < size; i++ {
         // Each thread computes partial sums
         mut partial_sum: i32 = 0;
         for mut j = i; j < size; j = j + 10 {
@@ -140,7 +140,7 @@ def sum_array_safe(data: ref i32, size: i32): i32 {
     mut partials: Arena = Arena.create(num_threads * 4);
     mut partial_sums: i32* = partials.data;
     
-    parallel for mut i = 0; i < num_threads; i = i + 1 {
+    parallel for mut i = 0; i < num_threads; i++ {
         mut sum: i32 = 0;
         val start: i32 = i * (size / num_threads);
         val end: i32 = start + (size / num_threads);
@@ -152,7 +152,7 @@ def sum_array_safe(data: ref i32, size: i32): i32 {
     
     // Merge partials sequentially
     mut total: i32 = 0;
-    for mut i = 0; i < num_threads; i = i + 1 {
+    for mut i = 0; i < num_threads; i++ {
         total = total + partial_sums[i];
     }
     
@@ -174,7 +174,7 @@ def process_with_local_state(items: ref StringList) {
         mut thread_count: i32 = 0;
     }
     
-    parallel for mut i = 0; i < len(deref(items)); i = i + 1 {
+    parallel for mut i = 0; i < len(deref(items)); i++ {
         val item: string = StringList.get(items, i);
         process_in_thread_buffer(item, addr(thread_buffer));
         thread_count = thread_count + 1;
@@ -193,7 +193,7 @@ Use parallel loops when:
 1. **Computation is CPU-intensive**
    ```axe
    //  Good: Expensive computation
-   parallel for mut i = 0; i < 10000; i = i + 1 {
+   parallel for mut i = 0; i < 10000; i++ {
        val result: f64 = fibonacci(40 + i);
        store_result(i, result);
    }
@@ -202,12 +202,12 @@ Use parallel loops when:
 2. **Number of iterations is large (100+)**
    ```axe
    //  Good: Sufficient work to amortize threading overhead
-   parallel for mut i = 0; i < 100000; i = i + 1 {
+   parallel for mut i = 0; i < 100000; i++ {
        process_item(i);
    }
    
    //  Bad: Too few iterations
-   parallel for mut i = 0; i < 10; i = i + 1 {
+   parallel for mut i = 0; i < 10; i++ {
        println i;  // Overhead exceeds benefit
    }
    ```
@@ -215,12 +215,12 @@ Use parallel loops when:
 3. **Iterations are independent**
    ```axe
    //  Good: No dependencies
-   parallel for mut i = 0; i < size; i = i + 1 {
+   parallel for mut i = 0; i < size; i++ {
        data[i] = data[i] * 2;  // Independent writes
    }
    
    //  Bad: Iteration-dependent
-   parallel for mut i = 1; i < size; i = i + 1 {
+   parallel for mut i = 1; i < size; i++ {
        data[i] = data[i-1] + data[i];  // Each depends on previous
    }
    ```
@@ -244,13 +244,13 @@ Total: ~110ms (overhead + sync can exceed sequential benefits)
 
 ```axe
 //  Good: Amortize threading overhead with large workload
-parallel for mut i = 0; i < 1000000; i = i + 1 {
+parallel for mut i = 0; i < 1000000; i++ {
     val result: f64 = complex_calculation(i);
     store_result(i, result);
 }
 
 //  Bad: Overhead dominates
-parallel for mut i = 0; i < 20; i = i + 1 {
+parallel for mut i = 0; i < 20; i++ {
     val x: i32 = i * 2;
     println i32_to_string(x);
 }
@@ -262,12 +262,12 @@ Ensure threads don't interfere via memory:
 
 ```axe
 //  Bad: False sharing and cache coherence issues
-parallel for mut i = 0; i < 1000000; i = i + 1 {
+parallel for mut i = 0; i < 1000000; i++ {
     shared_counter = shared_counter + 1;  // Race condition!
 }
 
 //  Good: Independent memory access
-parallel for mut i = 0; i < 1000000; i = i + 1 {
+parallel for mut i = 0; i < 1000000; i++ {
     result[i] = compute(i);  // Each thread touches different memory
 }
 ```
@@ -284,7 +284,7 @@ use std.arena (Arena);
 def apply_filter(image: ref i32, width: i32, height: i32, filter: ref i32) {
     val size: i32 = width * height;
     
-    parallel for mut i = 0; i < size; i = i + 1 {
+    parallel for mut i = 0; i < size; i++ {
         val pixel: i32 = image[i];
         val filtered: i32 = apply_kernel(pixel, i, width, height, filter);
         image[i] = filtered;
@@ -302,7 +302,7 @@ use std.arena (Arena);
 def monte_carlo_pi(samples: i32): f64 {
     mut inside: i32 = 0;
     
-    parallel for mut i = 0; i < samples; i = i + 1 {
+    parallel for mut i = 0; i < samples; i++ {
         val x: f64 = random_float();
         val y: f64 = random_float();
         val distance_sq: f64 = x * x + y * y;
@@ -330,7 +330,7 @@ def process_file_list(files: ref StringList) {
         val end: i32 = batch + 10;
         val limit: i32 = if end > count { count } else { end };
         
-        for mut i = batch; i < limit; i = i + 1 {
+        for mut i = batch; i < limit; i++ {
             val filename: string = StringList.get(files, i);
             process_file(filename);
         }
@@ -346,13 +346,13 @@ These operations are safe in parallel loops:
 
 ```axe
 //  Safe: Reading shared data
-parallel for mut i = 0; i < size; i = i + 1 {
+parallel for mut i = 0; i < size; i++ {
     val value: i32 = read_only_data[i];
     compute(value);
 }
 
 //  Safe: Independent writes
-parallel for mut i = 0; i < size; i = i + 1 {
+parallel for mut i = 0; i < size; i++ {
     output[i] = input[i] * 2;
 }
 
@@ -360,7 +360,7 @@ parallel for mut i = 0; i < size; i = i + 1 {
 parallel local {
     mut thread_state: i32 = 0;
 }
-parallel for mut i = 0; i < size; i = i + 1 {
+parallel for mut i = 0; i < size; i++ {
     thread_state = thread_state + 1;  // Each thread has own copy
 }
 ```
@@ -371,17 +371,17 @@ Avoid these in parallel loops:
 
 ```axe
 //  Unsafe: Unsynchronized shared writes
-parallel for mut i = 0; i < size; i = i + 1 {
+parallel for mut i = 0; i < size; i++ {
     counter = counter + 1;  // Race condition
 }
 
 //  Unsafe: Data dependencies between iterations
-parallel for mut i = 1; i < size; i = i + 1 {
+parallel for mut i = 1; i < size; i++ {
     data[i] = data[i-1] + input[i];  // Depends on previous iteration
 }
 
 //  Unsafe: Potential deadlock
-parallel for mut i = 0; i < size; i = i + 1 {
+parallel for mut i = 0; i < size; i++ {
     mutex_lock();  // Could deadlock with thread pool
     shared_list.add(i);
     mutex_unlock();
@@ -401,7 +401,7 @@ The Axe compiler automatically detects parallel constructs:
 // - Imports of std.parallelism
 
 def has_parallel_constructs() {
-    parallel for mut i = 0; i < 100; i = i + 1 {
+    parallel for mut i = 0; i < 100; i++ {
         compute(i);
     }
     // Compiler will link OpenMP
@@ -437,7 +437,7 @@ Compile with debug flags for parallel debugging:
 def slow_operation() {
     // Profile shows this loop is 80% of execution time
     // Parallelization reduces it to 25% - worthwhile
-    parallel for mut i = 0; i < 1000000; i = i + 1 {
+    parallel for mut i = 0; i < 1000000; i++ {
         expensive_computation(i);
     }
 }
@@ -447,12 +447,12 @@ def slow_operation() {
 
 ```axe
 //  Good: Simple, focused operations
-parallel for mut i = 0; i < size; i = i + 1 {
+parallel for mut i = 0; i < size; i++ {
     result[i] = input[i] * factor;
 }
 
 //  Poor: Complex operations with many branches
-parallel for mut i = 0; i < size; i = i + 1 {
+parallel for mut i = 0; i < size; i++ {
     if complex_condition(i) {
         val x: i32 = compute_x(i);
         val y: i32 = compute_y(i);
@@ -467,14 +467,14 @@ parallel for mut i = 0; i < size; i = i + 1 {
 ```axe
 //  Good: Test sequential version first
 def compute_sequential() {
-    for mut i = 0; i < size; i = i + 1 {
+    for mut i = 0; i < size; i++ {
         result[i] = expensive_operation(i);
     }
 }
 
 // Then parallelize after correctness is verified
 def compute_parallel() {
-    parallel for mut i = 0; i < size; i = i + 1 {
+    parallel for mut i = 0; i < size; i++ {
         result[i] = expensive_operation(i);
     }
 }

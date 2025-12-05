@@ -83,13 +83,13 @@ Axe provides C-style `for` loops for iterating a specific number of times:
 
 ```axe
 // Traditional for loop
-for mut i = 0; i < 10; i = i + 1 {
+for mut i = 0; i < 10; i++ {
     println i;
 }
 
 // Using references
 val data: ref StringList = get_data();
-for mut i = 0; i < len(deref(data)); i = i + 1 {
+for mut i = 0; i < len(deref(data)); i++ {
     val item: string = StringList.get(data, i);
     println item;
 }
@@ -105,7 +105,7 @@ for [initialization]; [condition]; [increment] {
 
 - **Initialization**: Declares and initializes loop variables (e.g., `mut i = 0`)
 - **Condition**: Boolean expression evaluated before each iteration
-- **Increment**: Expression executed after each iteration (e.g., `i = i + 1`)
+- **Increment**: Expression executed after each iteration (e.g., `i++`)
 - **Body**: Code executed in each iteration
 
 ### Parallel For Loops
@@ -113,7 +113,7 @@ for [initialization]; [condition]; [increment] {
 For CPU-intensive operations, Axe supports parallel for loops using OpenMP:
 
 ```axe
-parallel for mut i = 0; i < 1000; i = i + 1 {
+parallel for mut i = 0; i < 1000; i++ {
     val result: i32 = expensive_computation(i);
     process_result(result);
 }
@@ -133,7 +133,7 @@ Control loop execution with `break` and `continue`:
 
 ```axe
 // Using break to exit loop
-for mut i = 0; i < 100; i = i + 1 {
+for mut i = 0; i < 100; i++ {
     if should_exit(i) {
         break;
     }
@@ -141,7 +141,7 @@ for mut i = 0; i < 100; i = i + 1 {
 }
 
 // Using continue to skip to next iteration
-for mut i = 0; i < 100; i = i + 1 {
+for mut i = 0; i < 100; i++ {
     if skip_this(i) {
         continue;
     }
@@ -312,7 +312,7 @@ switch type {
 
 ```axe
 //  Clear loop intention
-for mut i = 0; i < items.len; i = i + 1 {
+for mut i = 0; i < items.len; i++ {
     val item: string = StringList.get(items, i);
     if should_skip(item) {
         continue;
@@ -325,13 +325,13 @@ for mut i = 0; i < items.len; i = i + 1 {
 
 ```axe
 //  Use parallel for CPU-intensive work
-parallel for mut i = 0; i < 10000; i = i + 1 {
+parallel for mut i = 0; i < 10000; i++ {
     val result: f64 = complex_math_operation(i);
     store_result(i, result);
 }
 
 //  Avoid for simple operations
-parallel for mut i = 0; i < 10; i = i + 1 {
+parallel for mut i = 0; i < 10; i++ {
     println i;  // Too much overhead
 }
 ```
@@ -344,7 +344,7 @@ For simple, repetitive operations, the compiler may optimize loops:
 
 ```axe
 // Compiler may optimize this
-for mut i = 0; i < items.len; i = i + 1 {
+for mut i = 0; i < items.len; i++ {
     process_simple(items.data[i]);
 }
 ```
@@ -363,7 +363,7 @@ Breaking out of loops early can significantly improve performance:
 
 ```axe
 //  Early termination for searches
-for mut i = 0; i < large_array.len; i = i + 1 {
+for mut i = 0; i < large_array.len; i++ {
     if found_target(large_array.data[i]) {
         return i;  // Exit early
     }

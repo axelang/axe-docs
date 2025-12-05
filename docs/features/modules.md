@@ -342,7 +342,7 @@ pub def trim_whitespace(s: string): string {
     mut end: i32 = str_len(s) - 1;
     
     // Find first non-whitespace
-    for mut i = 0; i < str_len(s); i = i + 1 {
+    for mut i = 0; i < str_len(s); i++ {
         val ch: char = get_char(s, i);
         if ch != ' ' and ch != '\t' {
             start = i;
@@ -365,7 +365,7 @@ pub def trim_whitespace(s: string): string {
 /// Convert string to lowercase
 pub def to_lower(s: string): string {
     mut result: string = str("");
-    for mut i = 0; i < str_len(s); i = i + 1 {
+    for mut i = 0; i < str_len(s); i++ {
         val ch: char = get_char(s, i);
         if ch >= 'A' and ch <= 'Z' {
             result = concat_c(result, ch + 32);

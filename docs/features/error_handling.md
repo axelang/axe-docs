@@ -73,7 +73,7 @@ def parse_int(text: string): i32 {
     }
     
     mut result: i32 = 0;
-    for mut i = 0; i < str_len(text); i = i + 1 {
+    for mut i = 0; i < str_len(text); i++ {
         val ch: char = get_char(text, i);
         if ch >= '0' and ch <= '9' {
             result = result * 10 + (ch - '0');
@@ -122,7 +122,7 @@ def try_parse_int(text: string): ParseResult {
     }
     
     mut value: i32 = 0;
-    for mut i = 0; i < str_len(text); i = i + 1 {
+    for mut i = 0; i < str_len(text); i++ {
         val ch: char = get_char(text, i);
         if ch >= '0' and ch <= '9' {
             value = value * 10 + (ch - '0');
@@ -250,7 +250,7 @@ Use special return values to indicate errors:
 
 ```axe
 def find_in_list(items: ref StringList, target: string): i32 {
-    for mut i = 0; i < len(deref(items)); i = i + 1 {
+    for mut i = 0; i < len(deref(items)); i++ {
         if equals_c(StringList.get(items, i), target) {
             return i;
         }
