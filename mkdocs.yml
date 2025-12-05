@@ -9,7 +9,6 @@ theme:
 nav:
   - Home: index.md
   - Getting Started: getting_started.md
-  - Installation: installation.md
   - Primitive Types: types.md
   - Standard Library:
     - std/arena: stdlib/arena.md
