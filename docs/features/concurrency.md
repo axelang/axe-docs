@@ -1,6 +1,6 @@
 # Concurrency
 
-Axe provides straightforward concurrency support through parallel loops and OpenMP integration, enabling CPU-bound parallelism without explicit thread management or complex synchronization primitives.
+Axe provides straightforward concurrency support through various parallel constructs, enabling CPU-bound parallelism without explicit thread management or complex synchronization primitives.
 
 ## Parallel For Loops
 
@@ -63,12 +63,6 @@ def transform_all(items: ref StringList): ref StringList {
 }
 ```
 
-**Characteristics:**
-- Each iteration processes independent data
-- No dependencies between iterations
-- Perfect parallelization
-- Minimal synchronization overhead
-
 ### Reduction Operations
 
 Combine results from parallel iterations:
@@ -77,10 +71,7 @@ Combine results from parallel iterations:
 def sum_array_parallel(data: ref i32, size: i32): i32 {
     mut total: i32 = 0;
     
-    // Note: Axe doesn't have built-in reduction syntax
-    // Use atomic updates or post-merge aggregation
     parallel for mut i = 0; i < size; i++ {
-        // Each thread computes partial sums
         mut partial_sum: i32 = 0;
         for mut j = i; j < size; j = j + 10 {
             partial_sum = partial_sum + data[j];
@@ -383,9 +374,9 @@ When parallel constructs are detected:
 4. Link against system OpenMP library
 ```
 
-## Best Practices
+## Notes
 
-### 1. Profile Before Parallelizing
+### Profile Before Parallelizing
 
 ```axe
 //  Good: Only parallelize after profiling shows bottleneck
@@ -398,26 +389,7 @@ def slow_operation() {
 }
 ```
 
-### 2. Keep Loop Bodies Simple
-
-```axe
-//  Good: Simple, focused operations
-parallel for mut i = 0; i < size; i++ {
-    result[i] = input[i] * factor;
-}
-
-//  Poor: Complex operations with many branches
-parallel for mut i = 0; i < size; i++ {
-    if complex_condition(i) {
-        val x: i32 = compute_x(i);
-        val y: i32 = compute_y(i);
-        val z: i32 = compute_z(x, y, i);
-        store_result(i, z);
-    }
-}
-```
-
-### 3. Test Correctness First
+### Test Correctness First
 
 ```axe
 //  Good: Test sequential version first
