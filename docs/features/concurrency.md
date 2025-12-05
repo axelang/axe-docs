@@ -27,7 +27,7 @@ use std.arena (Arena);
 
 def matrix_multiply(matrix_a: ref i32, matrix_b: ref i32, size: i32): ref i32 {
     mut result: Arena = Arena.create(size * size * 4);
-    mut result_data: i32* = result.data;
+    mut result_data: ref i32 = result.data;
     
     parallel for mut i = 0; i < size; i++ {
         for mut j = 0; j < size; j = j + 1 {
