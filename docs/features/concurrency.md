@@ -444,9 +444,3 @@ def compute_parallel() {
 - Further explicit synchronization primitives
 - More control over thread pool size
 - Work stealing and task scheduling
-
-## See Also
-
-- [Control Flow](control_flow.md) - Loop structures
-- [Error Handling](error_handling.md) - Error handling in parallel contexts
-- [Modules](modules.md) - std.parallelism module

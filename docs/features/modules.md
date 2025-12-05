@@ -516,9 +516,3 @@ pub def delete_user(id: i32): bool {
 def build_query(id: i32): string { }
 def execute_query(query: string): string { }
 ```
-
-## See Also
-
-- [Control Flow](control_flow.md) - Program structure
-- [Error Handling](error_handling.md) - Error handling patterns
-- [Concurrency](concurrency.md) - Module-level parallelism
