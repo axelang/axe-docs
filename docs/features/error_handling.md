@@ -27,8 +27,6 @@ pub def some_function(): SomeFunctionResult {
 }
 ```
 
-# Error Handling
-
 Axe provides a straightforward error handling model using return values and the `error` type, combined with the `panic` function for unrecoverable errors. This approach ensures predictable, efficient error handling without exceptions or try-catch blocks.
 
 ## The Error Type
