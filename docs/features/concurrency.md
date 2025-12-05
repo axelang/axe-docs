@@ -43,76 +43,77 @@ def matrix_multiply(matrix_a: ref i32, matrix_b: ref i32, size: i32): ref i32 {
 }
 ```
 
-## Parallel Patterns
-
-### Data Parallelism
-
-Distribute independent computations across loop iterations:
-
-```axe
-use std.lists (StringList);
-
-def transform_all(items: ref StringList): ref StringList {
-    val count: i32 = len(deref(items));
-    
-    parallel for mut i = 0; i < count; i++ {
-        val original: string = StringList.get(items, i);
-        val transformed: string = transform_string(original);
-        store_transformed(i, transformed);
-    }
-}
-```
 
 ### Reduction Operations
 
-Combine results from parallel iterations:
+Below is a clean, documentation-style explanation of what this Axe code does and how each construct behaves.
+
+---
+
+### **Example: Parallel Loop With Reduction**
+
+This example demonstrates how to use a **parallel `for` loop** with a **reduction** operation in Axe. A reduction allows multiple parallel iterations to safely update a shared variable using an associative operator—such as `+`—without causing data races.
+
 
 ```axe
-def sum_array_parallel(data: ref i32, size: i32): i32 {
-    mut total: i32 = 0;
+use std.io;
+
+def main() {
+    println "Testing parallel for with reduction:";
     
-    parallel for mut i = 0; i < size; i++ {
-        mut partial_sum: i32 = 0;
-        for mut j = i; j < size; j = j + 10 {
-            partial_sum = partial_sum + data[j];
-        }
-        total = total + partial_sum;  // Potential race condition!
+    mut sum: i32 = 0;
+    mut n: i32 = 100;
+    
+    parallel for mut i = 0 to n reduce(+:sum) {
+        sum += i;
     }
     
-    return total;
+    println "Sum from 0 to 99 = ";
+    println sum;
+    println "Expected: 4950";
 }
 ```
 
-**Better approach - compute partials then merge:**
+### **Parallel Loop**
 
 ```axe
-use std.arena (Arena);
-
-def sum_array_safe(data: ref i32, size: i32): i32 {
-    val num_threads: i32 = 4;  // Approximate
-    mut partials: Arena = Arena.create(num_threads * 4);
-    mut partial_sums: i32* = partials.data;
-    
-    parallel for mut i = 0; i < num_threads; i++ {
-        mut sum: i32 = 0;
-        val start: i32 = i * (size / num_threads);
-        val end: i32 = start + (size / num_threads);
-        for mut j = start; j < end; j = j + 1 {
-            sum = sum + data[j];
-        }
-        partial_sums[i] = sum;
-    }
-    
-    // Merge partials sequentially
-    mut total: i32 = 0;
-    for mut i = 0; i < num_threads; i++ {
-        total = total + partial_sums[i];
-    }
-    
-    Arena.destroy(addr(partials));
-    return total;
+parallel for mut i = 0 to n reduce(+:sum) {
+    sum += i;
 }
 ```
+
+This construct launches a **parallelized** loop:
+
+* `mut i = 0 to n`
+  Creates a loop variable `i` that iterates from `0` to `n - 1`.
+
+* `parallel for`
+  Instructs the runtime to distribute iterations across multiple threads or processing units.
+
+* `reduce(+:sum)`
+  Specifies a **reduction clause**, telling the compiler that:
+
+  * Each thread should maintain its own local copy of `sum`.
+  * The `+` operator is used to combine those local values at the end.
+  * The final combined value is written back into the shared `sum` variable.
+
+This ensures that the operation is thread-safe and deterministic, even though the loop body runs in parallel.
+
+#### Loop Body
+
+```axe
+sum += i;
+```
+
+Each iteration contributes the current index `i` to the thread-local accumulator.
+
+### **Output**
+
+After all parallel iterations are completed and the reduction is applied, the program prints:
+
+* The computed sum (`sum`)
+* The expected value for validation: `4950`
+  (the sum of integers from `0` to `99`)
 
 ### Parallel Local Variables
 
