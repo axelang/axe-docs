@@ -21,9 +21,6 @@ def process_items_parallel(items: ref StringList) {
 }
 ```
 
-## OpenMP Integration
-
-Axe automatically detects parallel constructs and links against OpenMP:
 
 ```axe
 use std.arena (Arena);
@@ -46,40 +43,6 @@ def matrix_multiply(matrix_a: ref i32, matrix_b: ref i32, size: i32): ref i32 {
 }
 ```
 
-## Platform Support
-
-### Windows
-
-On Windows, OpenMP is automatically linked when parallel constructs are detected:
-
-```axe
-def parallel_computation() {
-    // Compiler automatically links against libomp on Windows
-    parallel for mut i = 0; i < 1000; i++ {
-        compute_value(i);
-    }
-}
-```
-
-**Compilation behavior:**
-- Detection: Compiler scans AST for `parallel for` loops
-- Linking: Adds `-fopenmp` flag to clang
-- Runtime: OpenMP library handles thread pool management
-
-### POSIX (Linux, macOS)
-
-On POSIX systems, system OpenMP libraries are linked:
-
-```axe
-// Same code works on Linux and macOS
-// Automatically uses system libomp or libgomp
-def parallel_computation() {
-    parallel for mut i = 0; i < 1000; i++ {
-        compute_value(i);
-    }
-}
-```
-
 ## Parallel Patterns
 
 ### Data Parallelism
@@ -89,7 +52,6 @@ Distribute independent computations across loop iterations:
 ```axe
 use std.lists (StringList);
 
-/// Process each item independently
 def transform_all(items: ref StringList): ref StringList {
     val count: i32 = len(deref(items));
     
@@ -166,21 +128,24 @@ def sum_array_safe(data: ref i32, size: i32): i32 {
 Use `parallel local` to declare thread-local variables:
 
 ```axe
-use std.arena (Arena);
+def worker(arena: ref Arena, value: i32): i32 {
+    mut p: ref i32 = (ref i32)Arena.alloc(arena, sizeof(i32));
+    deref(p) = value * value;
+    return deref(p);
+}
 
-def process_with_local_state(items: ref StringList) {
-    parallel local {
-        mut thread_buffer: Arena = Arena.create(1024 * 1024);  // Per-thread buffer
-        mut thread_count: i32 = 0;
+def main() {
+    println "Running parallel computation...";
+
+    parallel local(mut arena: Arena) {
+        arena = Arena.create(1024);
+        val tid: i32 = Parallel.thread_id();
+        val result: i32 = worker(addr(arena), tid);
+        println $"Thread {tid} computed {result}";
+        Arena.destroy(addr(arena));
     }
-    
-    parallel for mut i = 0; i < len(deref(items)); i++ {
-        val item: string = StringList.get(items, i);
-        process_in_thread_buffer(item, addr(thread_buffer));
-        thread_count = thread_count + 1;
-    }
-    
-    // thread_buffer and thread_count cleaned up after parallel block
+
+    println "Done.";
 }
 ```
 
@@ -404,7 +369,6 @@ def has_parallel_constructs() {
     parallel for mut i = 0; i < 100; i++ {
         compute(i);
     }
-    // Compiler will link OpenMP
 }
 ```
 
@@ -417,15 +381,6 @@ When parallel constructs are detected:
 2. Detect usage in AST
 3. Add -fopenmp flag to clang
 4. Link against system OpenMP library
-```
-
-### Debugging
-
-Compile with debug flags for parallel debugging:
-
-```bash
-# Enable debug symbols for parallel debugging
-./axc program.axe
 ```
 
 ## Best Practices
