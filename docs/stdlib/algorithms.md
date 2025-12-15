@@ -1,5 +1,9 @@
 # .\algorithms.axec
 
+## def list_contains[T, T2](lst: T, value: T2): bool
+
+Check if some list contains a value.
+
 ## def strlst_contains(lst: StringList, value: string): bool
 
 Check if some StringList contains a value

@@ -8,7 +8,7 @@ HTTP response model containing status code, headers, and body
 
 Memory struct for curl write callback
 
-## def write_callback(contents: char*, size: usize, nmemb: usize, userp: char*): usize
+## def write_callback(contents: ref char, size: usize, nmemb: usize, userp: ref char): usize
 
 Internal write callback function for curl - grows buffer as needed
 
@@ -98,7 +98,9 @@ Initialize networking subsystem (cross-platform)
 
 ## def net_cleanup()
 
-Cleanup networking subsystem (cross-platform)
+Cleanup networking subsystem (cross-platform)
+This is a NOOP on POSIX systems.
+
 
 ## def server_create(port: i32): WebServer
 

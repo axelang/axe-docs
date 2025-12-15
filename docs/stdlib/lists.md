@@ -1,5 +1,17 @@
 # .\lists.axec
 
+## pub def create(arena: ref Arena, capacity: usize): ref name
+
+## pub def push(lst: ref name, arena: ref Arena, value: type)
+
+## pub def get(lst: ref name, index: usize): type
+
+## pub def clear(lst: ref name)
+
+## pub def contains(lst: ref name, value: type): bool
+
+## pub def print_all(lst: ref name)
+
 ## def int_eq(a: i32, b: i32): bool { return a == b; }
 
 ## def long_eq(a: i64, b: i64): bool { return a == b; }

@@ -48,6 +48,6 @@ Parse a CSV string into a document (using arena allocation)
 
 Parse CSV with default options (comma delimiter) using arena allocation
 
-## def to_string(doc: ref CsvDocument, options: CsvOptions): string
+## def csv_to_string(doc: ref CsvDocument, options: CsvOptions): string
 
 Convert a CSV document back to a string (using arena allocation)
