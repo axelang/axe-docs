@@ -6,7 +6,8 @@ You can create a new list using `list(T)`, append elements, access elements by i
 
 ```axe
 mut numbers: list(i32);
-numbers = list(i32){1, 2, 3, 4, 5};
+
+nums = [1, 2, 3, 4, 5];
 
 val first: i32 = numbers.data[0];
 val last: i32 = numbers.data[numbers.len - 1];
