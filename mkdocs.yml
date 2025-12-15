@@ -33,7 +33,7 @@ nav:
     - std.uuid: stdlib/uuid.md
     - std.os: stdlib/os.md
   - Control Flow: features/control_flow.md
-  - Modules: features/modules.md]
+  - Modules: features/modules.md
   - String Handling: features/strings.md
   - Lists: features/lists.md
   - Function Call Conventions: features/function_calls.md
