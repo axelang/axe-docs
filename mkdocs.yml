@@ -44,4 +44,5 @@ nav:
   - Overloads: features/overloads.md
   - Unsafe Blocks: features/unsafe.md
   - Memory Management: features/memory_management.md
+  - Foreign Types: features/foreign_types.md
   
