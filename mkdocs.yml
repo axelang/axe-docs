@@ -49,6 +49,9 @@ nav:
   - Overloads: features/overloads.md
   - Unsafe Blocks: features/unsafe.md
   - Memory Management: features/memory_management.md
+  - Pointers:
+    - Dereferencing: features/dereferencing.md
+    - Taking Addresses: features/taking_addresses.md
   - Tooling:
     - Saw CLI: tooling/saw_cli.md
     - Axels: tooling/axels.md
