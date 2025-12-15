@@ -37,5 +37,3 @@ val single: string = str("Hello, world.");
 `StringBuilder` and `string` provide the foundation for safe, efficient string operations in Axe. Use `StringBuilder` for performance-sensitive concatenations, and rely on the `string` model for standard immutable strings with predictable memory management.
 
 You can also combine `StringBuilder` with generic functions to build strings dynamically based on different input types, making it flexible for templating or logging utilities.
-
-If you want, I can continue with a section showing common `StringBuilder` patterns and idiomatic usage in Axe, including safe concatenation, formatting, and working with dynamic inputs.
