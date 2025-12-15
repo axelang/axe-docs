@@ -64,7 +64,7 @@ def add_or_concat[T](a: T, b: T): T {
     when T is string {
         return a + b;
     }
-    return a; // fallback for unsupported types
+    return a;
 }
 
 def process_values[T](x: T, y: T): T {
