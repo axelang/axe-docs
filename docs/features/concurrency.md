@@ -368,13 +368,3 @@ def compute_parallel() {
     }
 }
 ```
-
-### Future Enhancements
-
-- Task-based parallelism
-- Custom thread pool configuration
-- Fine-grained synchronization primitives
-- GPU acceleration support
-- Further explicit synchronization primitives
-- More control over thread pool size
-- Work stealing and task scheduling
