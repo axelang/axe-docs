@@ -37,3 +37,4 @@ nav:
   - Error Handling: features/error_handling.md
   - Concurrency and Parallelism: features/concurrency.md
   - Macros: features/macros.md
+  - Generics: features/generics.md
