@@ -74,4 +74,6 @@ def process_values[T](x: T, y: T): T {
 }
 ```
 
-In this example, `process_values` is entirely agnostic about the concrete type of its parameters. It simply forwards them to `add_or_concat`, and the compiler determines which `when` clause applies based on the type supplied at the callsite. This allows generic abstractions to be layered without losing precision or control over behavior. Taken together, these features make generics in Axe expressive without being opaque: type-driven specialization remains explicit in the source code, while the resulting functions behave as if they were hand-written for each supported type.
+In this example, `process_values` is entirely agnostic about the concrete type of its parameters. It simply forwards them to `add_or_concat`, and the compiler determines which `when` clause applies based on the type supplied at the callsite. This allows generic abstractions to be layered without losing precision or control over behavior. 
+
+These features make generics in Axe expressive without being opaque: type-driven specialization remains explicit in the source code, while the resulting functions behave as if they were hand-written for each supported type.
