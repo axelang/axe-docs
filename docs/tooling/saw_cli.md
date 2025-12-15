@@ -175,4 +175,4 @@ A common development workflow with saw looks like this:
 
 The saw CLI is designed to remain minimal while exposing the full power of the Axe compiler and ecosystem.
 
-Repo: https://github.com/axelang/saw
+Repo: [saw](https://github.com/axelang/saw)

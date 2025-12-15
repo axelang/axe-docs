@@ -10,4 +10,4 @@ If you want to generate documentation for all files in the current directory, yo
 axedoc --all
 ```
 
-Repo: https://github.com/axelang/axedoc
+Repo: [axedoc](https://github.com/axelang/axedoc)
