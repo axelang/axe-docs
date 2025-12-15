@@ -40,6 +40,7 @@ nav:
   - String Handling: features/strings.md
   - Lists: features/lists.md
   - Function Call Conventions: features/function_calls.md
+  - Extern Functions: features/extern_functions.md
   - Error Handling: features/error_handling.md
   - Concurrency and Parallelism: features/concurrency.md
   - Macros: features/macros.md
