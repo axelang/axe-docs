@@ -41,6 +41,6 @@ overload function_name(argument: type) {
 
 ## Caveats
 
-* Overloads are resolved at **compile-time**, not runtime. The compiler selects the appropriate implementation based on the static type of the argument.
+* Overloads are resolved at compile-time, not runtime. The compiler selects the appropriate implementation based on the static type of the argument.
 * Ambiguous overloads (e.g., two handlers for the same type) can result in compilation errors.
 * Overuse of overloads can lead to code that is harder to maintain and extend compared to using generics.
