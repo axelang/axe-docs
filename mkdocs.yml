@@ -48,3 +48,7 @@ nav:
   - Overloads: features/overloads.md
   - Unsafe Blocks: features/unsafe.md
   - Memory Management: features/memory_management.md
+  - Tooling:
+    - Saw CLI: tooling/saw_cli.md
+    - Axels: tooling/axe_language_server.md
+    - Axedoc: tooling/axedoc.md
