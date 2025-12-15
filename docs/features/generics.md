@@ -16,7 +16,7 @@ Here, the function’s logic is specialized at compile time based on the concret
 
 ## `when`/`is` clauses
 
-Generic `when`/`is` clauses can also be applied in more complex, nested contexts, where multiple type parameters interact with one another.
+Generic `when`/`is` clauses can also be applied in more complex, nested contexts, where multiple type parameters interact with each other.
 
 In the following example, the `list_contains` function is written to operate on both integer lists and string lists, even though the comparison logic differs between the two cases:
 
