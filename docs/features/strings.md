@@ -2,7 +2,7 @@ Strings in Axe are represented using a dedicated `string` model and a `StringBui
 
 `StringBuilder` is useful when you need to build up a string incrementally. Repeated concatenation using regular strings can be inefficient because each operation may require a new allocation and copy. `StringBuilder` amortizes this cost by preallocating a buffer that grows as needed. You can create a `StringBuilder` using `StringBuilder.init`, specifying an initial capacity, and then append strings or characters with `append`, `append_c`, or `append_char`.
 
-```axe
+```
 mut sb: StringBuilder = StringBuilder.init(128);
 StringBuilder.append(sb, str("Hello, "));
 StringBuilder.append(sb, str("world!"));
