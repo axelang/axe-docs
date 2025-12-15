@@ -35,7 +35,8 @@ nav:
   - Control Flow: features/control_flow.md
   - Modules: features/modules.md]
   - String Handling: features/strings.md
-  - Builtin Lists: features/lists.md
+  - Lists: features/lists.md
+  - Function Call Conventions: features/function_calls.md
   - Error Handling: features/error_handling.md
   - Concurrency and Parallelism: features/concurrency.md
   - Macros: features/macros.md
