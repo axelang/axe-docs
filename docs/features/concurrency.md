@@ -143,45 +143,6 @@ def main() {
 
 ## Performance Considerations
 
-### When to Use Parallel Loops
-
-Use parallel loops when:
-
-1. **Computation is CPU-intensive**
-   ```axe
-   //  Good: Expensive computation
-   parallel for mut i = 0; i < 10000; i++ {
-       val result: f64 = fibonacci(40 + i);
-       store_result(i, result);
-   }
-   ```
-
-2. **Number of iterations is large (100+)**
-   ```axe
-   //  Good: Sufficient work to amortize threading overhead
-   parallel for mut i = 0; i < 100000; i++ {
-       process_item(i);
-   }
-   
-   //  Bad: Too few iterations
-   parallel for mut i = 0; i < 10; i++ {
-       println i;  // Overhead exceeds benefit
-   }
-   ```
-
-3. **Iterations are independent**
-   ```axe
-   //  Good: No dependencies
-   parallel for mut i = 0; i < size; i++ {
-       data[i] = data[i] * 2;  // Independent writes
-   }
-   
-   //  Bad: Iteration-dependent
-   parallel for mut i = 1; i < size; i++ {
-       data[i] = data[i-1] + data[i];  // Each depends on previous
-   }
-   ```
-
 ### Overhead Costs
 
 Thread pool creation and synchronization have costs:
