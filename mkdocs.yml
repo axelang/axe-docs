@@ -5,7 +5,8 @@ theme:
   logo: assets/axe-2.png
   palette:
     primary: black
-
+  features:
+    - content.code.copy
 nav:
   - Home: index.md
   - Getting Started: getting_started.md
@@ -52,3 +53,16 @@ nav:
     - Saw CLI: tooling/saw_cli.md
     - Axels: tooling/axels.md
     - Axedoc: tooling/axedoc.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      use_pygments: false
+  - pymdownx.superfences
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js
+  - js/axe.js
+  - js/hljs-init.js
+
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css
