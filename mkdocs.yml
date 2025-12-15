@@ -41,4 +41,6 @@ nav:
   - Concurrency and Parallelism: features/concurrency.md
   - Macros: features/macros.md
   - Generics: features/generics.md
+  - Overloads: features/overloads.md
   - Unsafe Blocks: features/unsafe.md
+  
