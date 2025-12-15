@@ -1,4 +1,4 @@
-Generic functions in Axe can be defined using type parameters, for example:
+Generic functions in Axe can be defined using type parameters, allowing a single function body to express behaviour that adapts to multiple concrete types. A simple example would look like this:
 
 ```axe
 def some_function[T](arg: T): T {
@@ -12,11 +12,13 @@ def some_function[T](arg: T): T {
 }
 ```
 
-In this case, if the callsite is `some_function(2);`, it will return the value plus one, otherwise, if it is a float, it will double the value, if the value is neither a float or a 32-bit integer, it will simply return the value as-is.
+Here, the function’s logic is specialized at compile time based on the concrete type bound to `T`. If the callsite is `some_function(2);`, the compiler resolves `T` as `i32` and selects the corresponding branch, returning the value incremented by one. If the argument is a floating-point value, the float-specific branch applies and the value is doubled. For any other type, none of the `when` clauses match, and the function falls back to returning the argument unchanged. The important point is that the decision is driven entirely by type information, not by runtime inspection.
 
-Generic `when`/`is` clauses can also be utilized in nested contexts. 
+## `when`/`is` clauses
 
-In the following example, the `list_contains` function will work both for integer lists and string lists:
+Generic `when`/`is` clauses can also be applied in more complex, nested contexts, where multiple type parameters interact with one another.
+
+In the following example, the `list_contains` function is written to operate on both integer lists and string lists, even though the comparison logic differs between the two cases:
 
 ```axe
 def list_contains[T, T2](lst: T, value: T2): bool {
@@ -36,9 +38,9 @@ def list_contains[T, T2](lst: T, value: T2): bool {
 }
 ```
 
-You will recall from earlier, in the standard library documentation, that the `IntList` and `StringList` types are specialized structures wrapping arrays of integers and strings, respectively. The `cast` operator allows safe conversion of a generic value to a concrete type when a type match is guaranteed by the `when` clause. This ensures that generic functions can operate on multiple types while maintaining type safety and avoiding unnecessary runtime checks.
+As noted earlier in the standard library documentation, `IntList` and `StringList` are specialized structures that wrap arrays of integers and strings, respectively. The function leverages this knowledge by pairing constraints on both the list type and the element type within the same `when` clause. The `cast` operator is used to convert a generic value into a concrete type, but only in situations where the type relationship has already been established by the `when` condition. This makes the conversion safe and explicit, while preserving static guarantees. As a result, the function can remain generic without resorting to unchecked casts or repeated runtime type tests.
 
-Generic functions in Axe can also return different types depending on conditions. Consider the following example:
+Generic functions in Axe are also capable of returning values whose behavior depends on the type parameter, while still preserving a single, well-defined return type. For example:
 
 ```axe
 def maybe_double[T](arg: T): T {
@@ -52,9 +54,9 @@ def maybe_double[T](arg: T): T {
 }
 ```
 
-Here, `maybe_double` will automatically infer the return type from the input type `T`, and the behavior changes accordingly. This pattern is particularly useful in numeric computations or algorithms where the same logic should apply to multiple numeric types.
+In this case, `maybe_double` always returns a value of type `T`, but the computation performed varies depending on what `T` actually is. When instantiated with a floating-point type, floating-point arithmetic is used; when instantiated with a 32-bit integer, integer arithmetic applies instead. The return type is inferred directly from the input type, which makes the function predictable to use while still allowing type-specific behavior. This pattern is especially useful in numeric code, where the same conceptual operation should apply across multiple numeric representations.
 
-Another powerful feature is that generic functions can call other generic functions with inferred type parameters. For example:
+Another important aspect of Axe’s generics is that generic functions can freely call other generic functions, with type parameters inferred automatically from the arguments passed. For example:
 
 ```axe
 def add_or_concat[T](a: T, b: T): T {
@@ -72,4 +74,4 @@ def process_values[T](x: T, y: T): T {
 }
 ```
 
-In this example, `process_values` does not need to know the exact type of `x` and `y`. The call to `add_or_concat` will automatically select the correct `when` clause based on the concrete type provided at the callsite.
+In this example, `process_values` is entirely agnostic about the concrete type of its parameters. It simply forwards them to `add_or_concat`, and the compiler determines which `when` clause applies based on the type supplied at the callsite. This allows generic abstractions to be layered without losing precision or control over behavior. Taken together, these features make generics in Axe expressive without being opaque: type-driven specialization remains explicit in the source code, while the resulting functions behave as if they were hand-written for each supported type.
