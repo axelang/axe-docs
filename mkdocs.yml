@@ -9,7 +9,10 @@ theme:
 nav:
   - Home: index.md
   - Getting Started: getting_started.md
-  - Primitive Types: types.md
+  - Types:
+    - Primitive Types: types.md
+    - Foreign Types: features/foreign_types.md
+    - Opaque Types: features/opaque_types.md
   - Standard Library:
     - std.algorithms: stdlib/algorithms.md
     - std.arena: stdlib/arena.md
@@ -44,5 +47,3 @@ nav:
   - Overloads: features/overloads.md
   - Unsafe Blocks: features/unsafe.md
   - Memory Management: features/memory_management.md
-  - Foreign Types: features/foreign_types.md
-  - Opaque Types: features/opaque_types.md
